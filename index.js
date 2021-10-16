@@ -4,6 +4,19 @@ var fs = require('fs');
 
 
 
+/*var year = new Date().getFullYear
+var month = new Date().getMonth
+var day = new Date().getDay
+var hour = new Date().getHours
+var minutes = new Date().getMinutes
+var seconds = new Date().getSeconds */
+
+
+var date = new Date()
+date = `${date}`.replace('GMT+0300 (Москва, стандартное время)', '').split(' ').join('-').slice(0, -1)
+console.log(`current date ${date}`)
+
+
 let arr = new Array();
 
 client = net.createConnection(30000, "192.168.12.100", () => {
@@ -76,7 +89,7 @@ client.setTimeout(10000)  // TimeOut на 10 секунд
         var dataview = new DataView(arrayBuf) 
         console.log("dataview: ", dataview)
 
-        fs.open(path + "/file9.gtr", "a+", (err, fd) => {
+        fs.open(path + `/${date}`+ '.gtr', "a+", (err, fd) => {
             console.log(err)
             var file = fs.write(fd, typedArray, function(error) {if(error) console.log(error)})
             // var file = fs.writeFile(path + '/file7  .gtr', dataview, "null", function(error) {if(error) throw error})
